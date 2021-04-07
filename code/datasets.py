@@ -145,6 +145,7 @@ class TextDataset(data.Dataset):
     def load_captions(self, data_dir, filenames):
         all_captions = []
         for i in range(len(filenames)):
+            #cap_path = '/home/dobby/AttnGAN/data/coco/example_captions.txt'
             cap_path = '%s/text/%s.txt' % (data_dir, filenames[i])
             with open(cap_path, "r") as f:
                 captions = f.read().decode('utf8').split('\n')
