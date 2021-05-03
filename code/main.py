@@ -25,7 +25,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train a AttnGAN network')
     parser.add_argument('--cfg', dest='cfg_file',
                         help='optional config file',
-                        default='cfg/bird_attn2.yml', type=str)
+                        default='cfg/coco_attn2.yml', type=str)#default='cfg/bird_attn2.yml', type=str)
     parser.add_argument('--gpu', dest='gpu_id', type=int, default=-1)
     parser.add_argument('--data_dir', dest='data_dir', type=str, default='')
     parser.add_argument('--manualSeed', type=int, help='manual seed')
@@ -43,7 +43,7 @@ def gen_example(wordtoix, algo):
         for name in filenames:
             if len(name) == 0:
                 continue
-            filepath = '%s/%s.txt' % (cfg.DATA_DIR, name)
+            filepath = '%s/txt/%s.txt' % (cfg.DATA_DIR, name)
             with open(filepath, "r") as f:
                 print('Load from:', name)
                 sentences = f.read().split('\n')
@@ -80,6 +80,7 @@ def gen_example(wordtoix, algo):
                 cap_array[i, :c_len] = cap
             key = name[(name.rfind('/') + 1):]
             data_dic[key] = [cap_array, cap_lens, sorted_indices]
+    print("call algo")
     algo.gen_example(data_dic)
 
 
@@ -115,7 +116,7 @@ if __name__ == "__main__":
 
     split_dir, bshuffle = 'train', True
     if not cfg.TRAIN.FLAG:
-        # bshuffle = False
+        bshuffle = False
         split_dir = 'test'
 
     # Get data loader
@@ -127,22 +128,28 @@ if __name__ == "__main__":
     dataset = TextDataset(cfg.DATA_DIR, split_dir,
                           base_size=cfg.TREE.BASE_SIZE,
                           transform=image_transform)
+    print("finish loading dataset")
     assert dataset
     dataloader = torch.utils.data.DataLoader(
         dataset, batch_size=cfg.TRAIN.BATCH_SIZE,
         drop_last=True, shuffle=bshuffle, num_workers=int(cfg.WORKERS))
-
+    print("finish dataset")
     # Define models and go to train/evaluate
     algo = trainer(output_dir, dataloader, dataset.n_words, dataset.ixtoword)
-
+    print("loaded algo")
     start_t = time.time()
     if cfg.TRAIN.FLAG:
+        print("flag no train")
         algo.train()
     else:
         '''generate images from pre-extracted embeddings'''
         if cfg.B_VALIDATION:
+            print("flag validation")
             algo.sampling(split_dir)  # generate images for the whole valid dataset
+            
         else:
+            print("generating example")
             gen_example(dataset.wordtoix, algo)  # generate images for customized captions
+    print('working...')
     end_t = time.time()
     print('Total time for training:', end_t - start_t)

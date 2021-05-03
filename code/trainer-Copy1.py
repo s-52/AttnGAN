@@ -388,7 +388,7 @@ class condGANTrainer(object):
                 torch.load(model_dir, map_location=lambda storage, loc: storage)
             # state_dict = torch.load(cfg.TRAIN.NET_G)
             netG.load_state_dict(state_dict)
-            #print('Load G from: ', model_dir, "test2")
+            print('Load G from: ', model_dir, "test2")
 
             # the path to save generated images
             s_tmp = model_dir[:model_dir.rfind('.pth')]
@@ -441,7 +441,7 @@ class condGANTrainer(object):
 
     def gen_example(self, data_dic):
         if cfg.TRAIN.NET_G == '':
-            print('Error: the path for models is not found!')
+            print('Error: the path for morels is not found!')
         else:
             # Build and load the generator
             text_encoder = \
@@ -463,11 +463,11 @@ class condGANTrainer(object):
             state_dict = \
                 torch.load(model_dir, map_location=lambda storage, loc: storage)
             netG.load_state_dict(state_dict)
-            #print('Load G from: ', model_dir, "test3")
+            print('Load G from: ', model_dir, "test3")
             netG.cuda()
-            #print("cuda")
+            print("cuda")
             netG.eval()
-            #print("eval")
+            print("eval")
             for key in data_dic:
                 print(f"key: {key}")
                 save_dir = '%s/%s' % (s_tmp, key)
@@ -475,7 +475,7 @@ class condGANTrainer(object):
                 captions, cap_lens, sorted_indices = data_dic[key]
 
                 batch_size = captions.shape[0]
-                #print(f"batch size: {batch_size}")
+                print(f"batch size: {batch_size}")
                 nz = cfg.GAN.Z_DIM
 
                 with torch.no_grad():
@@ -486,20 +486,20 @@ class condGANTrainer(object):
                     cap_lens = cap_lens.cuda()
 
                 for i in range(1):  # 16
-                    #print(f"i: {i}")
+                    print(f"i: {i}")
                     with torch.no_grad():
                         noise = Variable(torch.FloatTensor(batch_size, nz))
                         noise = noise.cuda()
-                    #print("noise done")
+                    print("noise done")
                     #######################################################
                     # (1) Extract text embeddings
                     ######################################################
                     hidden = text_encoder.init_hidden(batch_size)
-                    #print("textencode1")
+                    print("textencode1")
                     # words_embs: batch_size x nef x seq_len
                     # sent_emb: batch_size x nef
                     words_embs, sent_emb = text_encoder(captions, cap_lens, hidden)
-                    #print("textencode2")
+                    print("textencode2")
                     mask = (captions == 0)
                     #######################################################
                     # (2) Generate fake images
@@ -507,14 +507,14 @@ class condGANTrainer(object):
                     noise.data.normal_(0, 1)
                     #netG wird mit zu vielen batches gecalled, sentsent_emb_ und words_embs müssen gesplittet werden
                     fake_imgs, attention_maps, _, _ = netG(noise, sent_emb, words_embs, mask)
-                    #print("net done")
+                    print("net done")
                     # G attention
                     cap_lens_np = cap_lens.cpu().data.numpy()
                     for j in range(batch_size):
-                        #print(f"j: {j}")
+                        print(f"j: {j}")
                         save_name = '%s/%d_s_%d' % (save_dir, i, sorted_indices[j])
                         for k in range(len(fake_imgs)):
-                            #print(f"k: {k}")
+                            print(f"k: {k}")
                             im = fake_imgs[k][j].data.cpu().numpy()
                             im = (im + 1.0) * 127.5
                             im = im.astype(np.uint8)
@@ -526,7 +526,7 @@ class condGANTrainer(object):
                             im.save(fullpath)
 
                         for k in range(len(attention_maps)):
-                            #print(f"k2: {k}")
+                            print(f"k2: {k}")
                             if len(fake_imgs) > 1:
                                 im = fake_imgs[k + 1].detach().cpu()
                             else:

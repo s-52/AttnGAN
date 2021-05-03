@@ -86,7 +86,7 @@ class ResBlock(nn.Module):
 # ############## Text2Image Encoder-Decoder #######
 class RNN_ENCODER(nn.Module):
     def __init__(self, ntoken, ninput=300, drop_prob=0.5,
-                 nhidden=128, nlayers=1, bidirectional=True):
+                 nhidden=16, nlayers=1, bidirectional=True):
         super(RNN_ENCODER, self).__init__()
         self.n_steps = cfg.TEXT.WORDS_NUM
         self.ntoken = ntoken  # size of the dictionary
