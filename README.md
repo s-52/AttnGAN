@@ -24,10 +24,7 @@ with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/c
 ### Image Generation
 
 
-**Image Generation**
-
-
-`/code/05 - new_images_rename`
+`./code/05 - Image_Generation.ipynb`
 
     - Input  customized txt files in "./data/coco/txt"
     - Input listing of files in "./data/coco/example_filenames.txt" to generate images from customized txt files.  
