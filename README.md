@@ -24,11 +24,10 @@ with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/c
 ### Image Generation
 
 
-**Text Generation**
+**Image Generation**
 
-Image generation sc
 
->>> 05 - new_images_rename >>> 
+`/code/05 - new_images_rename`
 
     - Input  customized txt files in "./data/coco/txt"
     - Input listing of files in "./data/coco/example_filenames.txt" to generate images from customized txt files.  
@@ -38,9 +37,12 @@ Image generation sc
 
 ### Transfer generated images
 
->>> 05 - new_images_rename >>>
+`05 - new_images_rename`
 
-This script extracts the highest resolutional images from their folders, renames them according to their folder, and saves them in a new directory. From here, the files can be extracted. 
+     - script extracts the highest resolutional images from their folders
+     - renames them according to their folder
+     - saves them in a new directory 
+     - from here, the files can be extracted. 
 
 
 ## Reference 
