@@ -4,18 +4,19 @@
 Modified Pytorch implementation for reproducing AttnGAN results in the paper [AttnGAN: Fine-Grained Text to Image Generation
 with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/content_cvpr_2018/papers/Xu_AttnGAN_Fine-Grained_Text_CVPR_2018_paper.pdf) by Tao Xu, Pengchuan Zhang, Qiuyuan Huang, Han Zhang, Zhe Gan, Xiaolei Huang, Xiaodong He. 
 
-<img src="AttnGAN.png" width="900px" height="350px"/>
+<img src="AttnGAN.png" />
 
 
 ## Requirements
 
-    - Python 3.6+
-    - Pytorch 1.0+
-    - additional Requirements can be found in the requirements.txt
+- Python 3.6+
+- Pytorch 1.0+
+- additional Requirements can be found in the requirements.txt
 
-**Pretrained Model**
-    - [DAMSM for coco](https://drive.google.com/open?id=1zIrXCE9F6yfbEJIbNP5-YrEe2pZcPSGJ). Download and save it to `DAMSMencoders/`
-    - [AttnGAN for coco](https://drive.google.com/open?id=1i9Xkg9nU74RAvkcqKE-rJYhjvzKAMnCi). Download and save it to `models/`
+### Pretrained Model
+
+- [DAMSM for coco](https://drive.google.com/open?id=1zIrXCE9F6yfbEJIbNP5-YrEe2pZcPSGJ). Download and save it to `DAMSMencoders/`
+- [AttnGAN for coco](https://drive.google.com/open?id=1i9Xkg9nU74RAvkcqKE-rJYhjvzKAMnCi). Download and save it to `models/`
 
 
 
@@ -24,22 +25,21 @@ with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/c
 ### Image Generation
 
 
-`./code/05 - Image_Generation.ipynb`
+[Image_Generation.ipynb](./code/Image_Generation.ipynb)
 
-    - Input  customized txt files in "./data/coco/txt"
-    - Input listing of files in "./data/coco/example_filenames.txt" to generate images from customized txt files.  
-    
-    - Input sentence in "./data/coco/example_captions.txt"  to generate images from customized sentences.
+- Input  customized txt files in "./data/coco/txt"
+- Input listing of files in "./data/coco/example_filenames.txt" to generate images from customized txt files.  
+- Input sentence in "./data/coco/example_captions.txt"  to generate images from customized sentences.
 
 
 ### Transfer generated images
 
-`05 - new_images_rename`
+[05 - new_images_rename.ipynb](05%20-%20new_images_rename.ipynb)
 
-     - script extracts the highest resolutional images from their folders
-     - renames them according to their folder
-     - saves them in a new directory 
-     - from here, the files can be extracted. 
+- script extracts the highest resolutional images from their folders
+- renames them according to their folder
+- saves them in a new directory 
+- from here, the files can be extracted. 
 
 
 ## Reference 
