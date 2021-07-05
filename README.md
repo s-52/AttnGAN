@@ -25,7 +25,7 @@ with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/c
 ### Image Generation
 
 
-[Image_Generation.ipynb](code/Image_Generation.ipynb)
+[Image_Generation.ipynb](./code/Image_Generation.ipynb)
 
 - Input  customized txt files in "./data/coco/txt"
 - Input listing of files in "./data/coco/example_filenames.txt" to generate images from customized txt files.  
@@ -34,7 +34,7 @@ with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/c
 
 ### Transfer generated images
 
-[05 - new_images_rename.ipynb](new_images_rename.ipynb)
+[05 - new_images_rename.ipynb](05%20-%20new_images_rename.ipynb)
 
 - script extracts the highest resolutional images from their folders
 - renames them according to their folder
